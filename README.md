@@ -105,6 +105,31 @@ Use este projeto para testar ferramentas de:
 - ✅ Sugestões de melhorias de QA
 - ✅ Automação de code review
 
+## 🤖 Análise com GitHub Copilot
+
+Este repositório inclui um **super prompt de QA** para análise automatizada.
+
+### Como usar:
+
+1. **No VS Code com Copilot:**
+   ```
+   @workspace Analise este repositório seguindo .github/prompts/QA_TEST_ASSIST_FULL.md
+   ```
+
+2. **Via GitHub Actions:**
+   - Vá em Actions > "QA Analysis Report" > "Run workflow"
+
+3. **Leia as instruções completas:**
+   - Ver arquivo `.github/COPILOT_INSTRUCTIONS.md`
+
+O prompt analisa:
+- ✅ Vulnerabilidades de segurança
+- ✅ Cobertura e qualidade de testes
+- ✅ Aderência ao Swagger/OpenAPI
+- ✅ Conformidade com API First
+- ✅ Pirâmide de Testes
+- ✅ Pontos críticos e recomendações
+
 ## Melhorias Necessárias
 
 1. Implementar hashing de senhas (bcrypt/Argon2)
