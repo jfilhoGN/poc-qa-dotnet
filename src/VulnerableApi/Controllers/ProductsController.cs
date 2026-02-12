@@ -129,6 +129,34 @@ public class ProductsController : ControllerBase
         });
     }
 
+    [HttpGet("featured")]
+    public IActionResult GetFeaturedProducts()
+    {
+        // VULNERABILITY: No caching - always recalculates
+        // VULNERABILITY: Hardcoded featured list not maintainable
+        var featured = new List<object>
+        {
+            new { Id = 1, Name = "Laptop", Price = 1500.00m, Featured = true, Discount = 10 },
+            new { Id = 3, Name = "Keyboard", Price = 75.00m, Featured = true, Discount = 5 }
+        };
+        
+        return Ok(featured);
+    }
+
+    [HttpGet("recommendations")]
+    public IActionResult GetProductRecommendations([FromQuery] int userId = 0)
+    {
+        // VULNERABILITY: No user validation
+        // VULNERABILITY: Recommendation algorithm is basic and not optimized
+        var recommendations = _products
+            .OrderByDescending(p => p.Stock)
+            .Take(3)
+            .Select(p => new { p.Id, p.Name, p.Price, RecommendationScore = new Random().Next(70, 100) })
+            .ToList();
+        
+        return Ok(recommendations);
+    }
+
     [HttpGet("search")]
     public IActionResult SearchProducts([FromQuery] string query)
     {
